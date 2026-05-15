@@ -62,6 +62,46 @@ The first version will focus on a public industrial dataset and include:
 - Evaluation metrics
 - Interpretation of false positives and false negatives
 
+## Initial EDA Results
+
+The first exploratory data analysis was performed using the SECOM dataset from the UCI Machine Learning Repository.
+
+The initial EDA focuses on three basic questions:
+
+1. How imbalanced is the pass/fail label distribution?
+2. How much missing data exists across process features?
+3. Are missing values concentrated in specific features or samples?
+
+### Dataset Shape
+
+The dataset was loaded from the original UCI SECOM raw files.
+
+- Number of samples: 1,567
+- Number of process features: 590
+- Target label:
+  - `-1`: Pass
+  - `1`: Fail
+
+Note: Some dataset descriptions report 591 variables. In this project, the feature matrix is loaded directly from `secom.data`, while the target label is loaded separately from `secom_labels.data`.
+
+### Label Distribution
+
+The SECOM dataset is highly imbalanced. Most samples are pass cases, while fail cases are rare.
+
+This makes simple accuracy insufficient as an evaluation metric. For later modeling, fail-class recall, precision, F1-score, balanced accuracy, and confusion matrix analysis will be more important.
+
+![SECOM Label Distribution](reports/figures/label_distribution.png)
+
+### Missing Value Analysis
+
+The dataset contains missing values across process features.
+
+Feature-level missing ratio was calculated as:
+
+```text
+missing_ratio = number of missing values in a feature / number of samples
+
+
 ## Repository Structure
 
 ```text
