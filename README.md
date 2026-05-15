@@ -18,6 +18,26 @@ This project focuses on building a reproducible workflow for:
 - Error analysis
 - Interpretation for quality monitoring and decision support
 
+## Dataset
+
+This project will first use the SECOM dataset from the UCI Machine Learning Repository.
+
+SECOM is a public semiconductor manufacturing dataset for pass/fail classification and feature relevance analysis. It contains manufacturing process measurements, missing values, and highly imbalanced quality labels.
+
+Dataset summary:
+
+- Source: UCI Machine Learning Repository
+- Domain: Semiconductor manufacturing
+- Instances: 1,567
+- Features: 591
+- Label:
+  - `-1`: Pass
+  - `1`: Fail
+- Missing values: Yes
+- License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+No proprietary or confidential company data will be used.
+
 ## Planned Dataset
 
 This project will use public datasets only.
