@@ -13,76 +13,57 @@ This project focuses on building a reproducible workflow for:
 - Data understanding
 - Data cleaning and validation
 - Exploratory data analysis
-- Baseline anomaly detection
+- Baseline modeling
 - Model evaluation
 - Error analysis
 - Interpretation for quality monitoring and decision support
 
 ## Dataset
 
-This project will first use the SECOM dataset from the UCI Machine Learning Repository.
+This project first uses the SECOM dataset from the UCI Machine Learning Repository.
 
-SECOM is a public semiconductor manufacturing dataset for pass/fail classification and feature relevance analysis. It contains manufacturing process measurements, missing values, and highly imbalanced quality labels.
+SECOM is a public semiconductor manufacturing dataset for pass/fail classification, feature relevance analysis, and process monitoring. It contains anonymized process measurements, missing values, and highly imbalanced quality labels.
 
 Dataset summary:
 
 - Source: UCI Machine Learning Repository
 - Domain: Semiconductor manufacturing
 - Instances: 1,567
-- Features: 591
-- Label:
+- Official feature count: 591
+- Target label:
   - `-1`: Pass
   - `1`: Fail
 - Missing values: Yes
 - License: Creative Commons Attribution 4.0 International (CC BY 4.0)
 
-No proprietary or confidential company data will be used.
+Note: In this project, the feature matrix is loaded directly from `secom.data`, while the target label is loaded separately from `secom_labels.data`. The working feature matrix used in the EDA notebook contains 590 process feature columns.
 
-## Planned Dataset
-
-This project will use public datasets only.
-
-Candidate datasets:
-
-1. SECOM semiconductor manufacturing dataset
-2. Wafer map defect classification dataset
-3. Public industrial sensor anomaly datasets
-4. Financial market anomaly or regime-change datasets
-
-No proprietary or confidential company data will be used.
+No proprietary or confidential company data is used.
 
 ## Initial Scope
 
-The first version will focus on a public industrial dataset and include:
+The first version focuses on the SECOM dataset and includes:
 
-- Missing value analysis
-- Feature distribution analysis
-- Outlier detection
-- Baseline anomaly detection model
-- Evaluation metrics
-- Interpretation of false positives and false negatives
+- Data loading from the original UCI raw files
+- Label distribution analysis
+- Feature-level missing value analysis
+- Sample-level missing value analysis
+- Initial interpretation of data quality issues
+- Preparation for baseline classification modeling
 
 ## Initial EDA Results
 
-The first exploratory data analysis was performed using the SECOM dataset from the UCI Machine Learning Repository.
+The first exploratory data analysis was performed in:
 
-The initial EDA focuses on three basic questions:
+```text
+notebooks/01_eda.ipynb
+```
+
+The initial EDA focused on three basic questions:
 
 1. How imbalanced is the pass/fail label distribution?
 2. How much missing data exists across process features?
 3. Are missing values concentrated in specific features or samples?
-
-### Dataset Shape
-
-The dataset was loaded from the original UCI SECOM raw files.
-
-- Number of samples: 1,567
-- Number of process features: 590
-- Target label:
-  - `-1`: Pass
-  - `1`: Fail
-
-Note: Some dataset descriptions report 591 variables. In this project, the feature matrix is loaded directly from `secom.data`, while the target label is loaded separately from `secom_labels.data`.
 
 ### Label Distribution
 
@@ -100,7 +81,23 @@ Feature-level missing ratio was calculated as:
 
 ```text
 missing_ratio = number of missing values in a feature / number of samples
+```
 
+This helps identify process variables that may be unreliable or too sparse for direct modeling.
+
+Detailed missing value plots are available in the EDA notebook and saved under:
+
+```text
+reports/figures/
+```
+
+## Initial Findings
+
+- The dataset has a strong class imbalance problem.
+- Missing values are present across process features.
+- Feature-level and sample-level missing ratios should be checked before modeling.
+- Accuracy alone is not sufficient for evaluating fail detection performance.
+- The next step is to build a baseline classification workflow with proper preprocessing and imbalance-aware evaluation.
 
 ## Repository Structure
 
@@ -109,6 +106,7 @@ industrial-data-anomaly-detection/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
+├── requirements.txt
 ├── data/
 │   └── README.md
 ├── notebooks/
@@ -117,3 +115,48 @@ industrial-data-anomaly-detection/
 │   └── placeholder.py
 └── reports/
     └── figures/
+        ├── label_distribution.png
+        ├── feature_missing_ratio_distribution.png
+        └── sample_missing_ratio_distribution.png
+```
+
+## Methods
+
+Planned methods include:
+
+- Exploratory data analysis
+- Missing value handling
+- Feature scaling
+- Baseline classification models
+- Imbalance-aware evaluation
+- Error analysis and visualization
+
+## Success Criteria
+
+This project will be considered successful if it provides:
+
+1. A clear problem definition
+2. A reproducible data analysis workflow
+3. Baseline modeling results
+4. Visualizations that explain the data and model behavior
+5. Practical interpretation from an industrial data perspective
+
+## Current Status
+
+Initial SECOM exploratory data analysis has been completed.
+
+Next step:
+
+```text
+Build a baseline classification model for pass/fail prediction.
+```
+
+## Repository Policy
+
+This repository uses only public datasets, personal study materials, and self-developed code.
+
+No proprietary or confidential company data is included.
+
+## Citation
+
+McCann, M. & Johnston, A. (2008). SECOM [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C54305
